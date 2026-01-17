@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="20.0" style="-fx-padding: 30;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.krlsystem.controller.AdminReportController">
+   <children>
+      <TableView fx:id="reportTable" VBox.vgrow="ALWAYS">
+        <columns>
+          <TableColumn fx:id="colId" prefWidth="80.0" text="ID" />
+          <TableColumn fx:id="colUser" prefWidth="120.0" text="User ID" />
+          <TableColumn fx:id="colRoute" prefWidth="250.0" text="Rute" />
+          <TableColumn fx:id="colFare" prefWidth="120.0" text="Tarif" />
+          <TableColumn fx:id="colTime" prefWidth="200.0" text="Waktu" />
+        </columns>
+      </TableView>
+   </children>
+</VBox>

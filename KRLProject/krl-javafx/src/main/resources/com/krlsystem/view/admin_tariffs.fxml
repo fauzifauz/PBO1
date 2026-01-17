@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" spacing="30.0" style="-fx-padding: 30;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.krlsystem.controller.AdminTariffController">
+   <children>
+      <VBox alignment="CENTER" maxWidth="400.0" spacing="20.0" styleClass="stat-card">
+         <children>
+            <Text styleClass="header-text" text="Atur Tarif KRL" />
+            <VBox spacing="5.0">
+               <children>
+                  <Label text="Tarif Dasar (Base Fare)" />
+                  <TextField fx:id="baseFareField" />
+               </children>
+            </VBox>
+            <VBox spacing="5.0">
+               <children>
+                  <Label text="Tarif per KM (Fare per KM)" />
+                  <TextField fx:id="perKmField" />
+               </children>
+            </VBox>
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleSave" styleClass="btn-primary" text="Simpan Perubahan" />
+            <Label fx:id="statusLabel" />
+         </children>
+      </VBox>
+   </children>
+</VBox>

@@ -1,38 +1,26 @@
 public class Station {
-    
-    // Menyimpan nama stasiun, bersifat private agar tidak bisa diakses langsung dari luar class
-    private String name;
+    private String id;                 
+    private String name;               
+    private double distanceFromStart;  // Jarak dari stasiun awal
 
-    // Constructor: dipanggil ketika membuat object Station baru
-    public Station(String name) {
-
-        // Validasi: nama tidak boleh null, kosong, atau hanya spasi
-        if (name == null || name.trim().isEmpty()) 
-            throw new IllegalArgumentException("Nama stasiun tidak boleh kosong");
-
-        // Menyimpan nama yang sudah di-trim (menghapus spasi di depan & belakang)
-        this.name = name.trim();
+    // Constructor untuk inisialisasi stasiun
+    public Station(String id, String name, double distanceFromStart) {
+        this.id = id;
+        this.name = name;
+        this.distanceFromStart = distanceFromStart;
     }
 
-    // Getter: mengembalikan nama stasiun
-    public String getName() { 
-        return name; 
+    public String getId() { return id; }                     // Getter ID
+    public String getName() { return name; }                 // Getter nama
+    public void setName(String name) { this.name = name; }   // Setter nama
+    public double getDistanceFromStart() { return distanceFromStart; } // Getter jarak
+    public void setDistanceFromStart(double distanceFromStart) {       // Setter jarak
+        this.distanceFromStart = distanceFromStart;
     }
 
-    // Setter: mengubah nama stasiun
-    public void setName(String name) {
-
-        // Validasi lagi untuk memastikan nama baru tidak kosong atau null
-        if (name == null || name.trim().isEmpty()) 
-            throw new IllegalArgumentException("Nama stasiun tidak boleh kosong");
-
-        // Menyimpan nama baru setelah membersihkan spasi
-        this.name = name.trim();
-    }
-
-    // Override: mengubah perilaku default toString() agar menampilkan nama stasiun
+    // Menampilkan info stasiun dalam format string
     @Override
-    public String toString() { 
-        return name; 
+    public String toString() {
+        return "[" + id + "] " + name + " (" + distanceFromStart + " km)";
     }
 }

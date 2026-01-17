@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" spacing="30.0" style="-fx-padding: 30;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.krlsystem.controller.PassengerBookingController">
+   <children>
+      <VBox maxWidth="500.0" spacing="20.0" styleClass="stat-card">
+         <children>
+            <Text styleClass="header-text" text="Beli Tiket KRL" />
+            <VBox spacing="10.0">
+               <children>
+                  <Label text="Stasiun Asal" />
+                  <ComboBox fx:id="originCombo" maxWidth="1.7976931348623157E308" promptText="Pilih stasiun asal" />
+               </children>
+            </VBox>
+            <VBox spacing="10.0">
+               <children>
+                  <Label text="Stasiun Tujuan" />
+                  <ComboBox fx:id="destCombo" maxWidth="1.7976931348623157E308" promptText="Pilih stasiun tujuan" />
+               </children>
+            </VBox>
+            <Separator />
+            <HBox alignment="CENTER_RIGHT" spacing="20.0">
+               <children>
+                  <VBox alignment="CENTER_RIGHT">
+                     <children>
+                        <Text text="Total Tarif" />
+                        <Label fx:id="fareLabel" style="-fx-font-size: 20; -fx-font-weight: bold;" text="Rp 0" />
+                     </children>
+                  </VBox>
+                  <Button mnemonicParsing="false" onAction="#handlePay" prefHeight="45.0" prefWidth="150.0" styleClass="btn-primary" text=" BAYAR" />
+               </children>
+            </HBox>
+            <Label fx:id="statusLabel" />
+         </children>
+      </VBox>
+   </children>
+</VBox>

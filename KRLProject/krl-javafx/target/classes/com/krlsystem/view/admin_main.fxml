@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.kordamp.ikonli.javafx.*?>
+
+<HBox prefHeight="600.0" prefWidth="1000.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.krlsystem.controller.AdminController">
+   <children>
+      <!-- Sidebar -->
+      <VBox prefWidth="250.0" styleClass="sidebar">
+         <children>
+            <VBox alignment="CENTER" prefHeight="150.0" spacing="10.0">
+               <children>
+                  <FontIcon iconLiteral="fas-user-shield" iconSize="48" iconColor="white"/>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="ADMIN PANEL">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Text>
+               </children>
+            </VBox>
+            <VBox spacing="5.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <Button fx:id="dashboardBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showDashboard" styleClass="nav-button" text=" Dashboard">
+                     <graphic>
+                        <FontIcon iconLiteral="fas-home" iconColor="white"/>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="stationsBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showStations" styleClass="nav-button" text=" Kelola Stasiun">
+                     <graphic>
+                        <FontIcon iconLiteral="fas-map-marker-alt" iconColor="white"/>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="tariffsBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showTariffs" styleClass="nav-button" text=" Kelola Tarif">
+                     <graphic>
+                        <FontIcon iconLiteral="fas-money-bill-wave" iconColor="white"/>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="usersBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showUsers" styleClass="nav-button" text=" Data User">
+                     <graphic>
+                        <FontIcon iconLiteral="fas-users" iconColor="white"/>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="reportsBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showReports" styleClass="nav-button" text=" Laporan Transaksi">
+                     <graphic>
+                        <FontIcon iconLiteral="fas-file-invoice-dollar" iconColor="white"/>
+                     </graphic>
+                  </Button>
+               </children>
+            </VBox>
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogout" styleClass="nav-button" text=" Logout">
+               <graphic>
+                  <FontIcon iconLiteral="fas-sign-out-alt" iconColor="white"/>
+               </graphic>
+            </Button>
+         </children>
+      </VBox>
+      
+      <!-- Main Content -->
+      <VBox styleClass="main-bg" HBox.hgrow="ALWAYS">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="60.0" style="-fx-background-color: white; -fx-padding: 0 20;">
+               <children>
+                  <Label fx:id="viewTitle" styleClass="header-text" text="Dashboard" />
+               </children>
+            </HBox>
+            <StackPane fx:id="contentPane" VBox.vgrow="ALWAYS">
+               <children>
+                  <!-- Content will be swapped here -->
+               </children>
+            </StackPane>
+         </children>
+      </VBox>
+   </children>
+</HBox>

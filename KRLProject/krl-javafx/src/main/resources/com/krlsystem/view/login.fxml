@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.kordamp.ikonli.javafx.*?>
+
+<StackPane prefHeight="600.0" prefWidth="800.0" styleClass="main-bg" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.krlsystem.controller.LoginController">
+   <children>
+      <VBox alignment="CENTER" maxWidth="400.0" spacing="20.0" styleClass="login-card">
+         <children>
+            <FontIcon iconLiteral="fas-train" iconSize="64" iconColor="#1a237e"/>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="header-text" text="KRL SYSTEM" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sistem Informasi Terpadu" />
+            
+            <VBox spacing="10.0">
+               <children>
+                  <Label text="Username" />
+                  <TextField fx:id="usernameField" promptText="Masukkan username" />
+               </children>
+            </VBox>
+            
+            <VBox spacing="10.0">
+               <children>
+                  <Label text="Password" />
+                  <PasswordField fx:id="passwordField" promptText="Masukkan password" />
+               </children>
+            </VBox>
+            
+            <Button fx:id="loginBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogin" styleClass="btn-primary" text="LOGIN" />
+            <Button fx:id="registerBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleRegister" styleClass="btn-secondary" text="REGISTER" />
+            
+            <Label fx:id="statusLabel" textFill="RED" />
+         </children>
+      </VBox>
+   </children>
+</StackPane>

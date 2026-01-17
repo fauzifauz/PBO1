@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" spacing="30.0" style="-fx-padding: 30;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.krlsystem.controller.PassengerTopUpController">
+   <children>
+      <VBox alignment="CENTER" maxWidth="400.0" spacing="20.0" styleClass="stat-card">
+         <children>
+            <Text styleClass="header-text" text="Top Up Saldo" />
+            <VBox spacing="10.0">
+               <children>
+                  <Label text="Jumlah Top Up (Rp)" />
+                  <TextField fx:id="amountField" promptText="Masukkan nominal" />
+               </children>
+            </VBox>
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleTopUp" styleClass="btn-primary" text="Konfirmasi Top Up" />
+            <Label fx:id="statusLabel" />
+         </children>
+      </VBox>
+   </children>
+</VBox>

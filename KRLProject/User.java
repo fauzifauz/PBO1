@@ -1,27 +1,23 @@
 public abstract class User {
-    private String username;
-    private String password;
-    private String role;
+    protected String username; // Username user
+    protected String password; // Password user
+    protected String role;     // Role user (Admin/Passenger)
 
+    // Constructor untuk inisialisasi user
     public User(String username, String password, String role) {
-        if (username == null || username.trim().isEmpty()) throw new IllegalArgumentException("Username tidak boleh kosong");
-        if (password == null) throw new IllegalArgumentException("Password tidak boleh null");
-        this.username = username.trim();
+        this.username = username;
         this.password = password;
         this.role = role;
     }
 
-    public String getUsername() { return username; }
-    protected boolean checkPassword(String p) { return password.equals(p); }
-    public boolean checkCredentials(String u, String p) {
-        return username.equals(u) && checkPassword(p);
-    }
-    public String getRole() { return role; }
-
-    public void setPassword(String newPass) {
-        if (newPass == null || newPass.length() < 4) throw new IllegalArgumentException("Password minimal 4 karakter");
-        this.password = newPass;
+    // Validasi login
+    public boolean checkCredentials(String inputUsername, String inputPassword) {
+        return this.username.equals(inputUsername) && this.password.equals(inputPassword);
     }
 
-    public abstract void showMenu(java.util.Scanner sc, DataStore store);
+    public String getUsername() { return username; } // Getter username
+    public String getRole() { return role; }         // Getter role
+
+    // Method abstrak, wajib diimplementasikan child class
+    public abstract void showMenu();
 }

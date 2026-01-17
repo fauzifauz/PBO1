@@ -1,94 +1,118 @@
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 public class KRLSystem {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        DataStore store = new DataStore();
+    private List<Station> stations;        
+    private List<User> users;             
+    private TariffManager tariffManager;    
 
-        store.addStation(new Station("Tanah Abang"));
-        store.addStation(new Station("Manggarai"));
-        store.addStation(new Station("Bogor"));
-        store.addStation(new Station("Serpong"));
+    // Constructor inisialisasi sistem
+    public KRLSystem() {
+        this.stations = new ArrayList<>();
+        this.users = new ArrayList<>();
+        this.tariffManager = new TariffManager(3000, 1000); // Tarif default
+        seedData(); // Tambah data awal
+    }
 
-        store.addRoute(new Route("Tanah Abang", "Serpong", 5000));
-        store.addRoute(new Route("Manggarai", "Bogor", 8000));
-        store.addRoute(new Route("Tanah Abang", "Manggarai", 4000));
-        store.addRoute(new Route("Bogor", "Serpong", 12000));
+    // Inisialisasi data default
+    private void seedData() {
+        users.add(new Admin("admin", "admin123")); // Admin default
+        Passenger p1 = new Passenger("budi", "budi123");
+        p1.topUp(50000); 
+        users.add(p1); // User default
 
-        store.addUser(new Admin("admin", "admin123"));
-        store.addUser(new Passenger("fauzi", "1234", 20000));
+        // Stasiun default
+        stations.add(new Station("ST01", "Jakarta Kota", 0.0));
+        stations.add(new Station("ST02", "Manggarai", 9.8));
+        stations.add(new Station("ST03", "Tebet", 12.4));
+        stations.add(new Station("ST04", "Pasar Minggu", 17.0));
+        stations.add(new Station("ST05", "Universitas Indonesia", 27.0));
+        stations.add(new Station("ST06", "Bogor", 45.0));
+    }
 
-        System.out.println("=== SISTEM RUTE & PEMBAYARAN KRL ===");
-
-        boolean exitProgram = false;
-
-        // Loop utama program
-        do {
-            System.out.println("\n1. Login");
-            System.out.println("2. Daftar (Passenger)");
-            System.out.println("0. Keluar");
-            System.out.print("Pilih: ");
-            int mainChoice = Utils.readInt(sc);
-            sc.nextLine(); // Membersihkan buffer
-
-            if (mainChoice == 1) {
-                System.out.print("Username: ");
-                String u = sc.nextLine().trim();
-                System.out.print("Password: ");
-                String p = sc.nextLine().trim();
-
-                User user = store.authenticate(u, p);
-                if (user != null) {
-                    System.out.println("Login berhasil sebagai " 
-                        + user.getRole() + " (" + user.getUsername() + ")");
-                    user.showMenu(sc, store);
-                } else {
-                    System.out.println("Login gagal. Username/Password salah.");
-                }
-
-            } else if (mainChoice == 2) {
-                boolean ulangDaftar;
-                do {
-                    ulangDaftar = false;
-                    try {
-                        System.out.print("Buat username: ");
-                        String nu = sc.nextLine().trim();
-                        System.out.print("Buat password (min 4): ");
-                        String np = sc.nextLine().trim();
-                        System.out.print("Top-up saldo awal (Rp): ");
-                        double initBal = Utils.readDouble(sc);
-                        sc.nextLine();
-
-                        store.addUser(new Passenger(nu, np, initBal));
-                        System.out.println("Registrasi berhasil. Silakan login.");
-                    } catch (IllegalArgumentException ex) {
-                        System.out.println("Gagal registrasi: " + ex.getMessage());
-                    }
-
-                    System.out.print("Ketik 0 untuk kembali ke menu utama, atau angka lain untuk daftar lagi: ");
-                    int kembali = Utils.readInt(sc);
-                    sc.nextLine();
-                    if (kembali != 0) {
-                        ulangDaftar = true;
-                    }
-                } while (ulangDaftar);
-
-            } else if (mainChoice == 0) {
-                System.out.println("Apakah Anda yakin ingin keluar? (y/n): ");
-                String confirm = sc.nextLine().trim();
-                if (confirm.equalsIgnoreCase("y")) {
-                    exitProgram = true;
-                    System.out.println("Terima kasih. Program selesai.");
-                } else {
-                    System.out.println("Kembali ke menu utama...");
-                }
-
-            } else {
-                System.out.println("Pilihan tidak valid. Silakan coba lagi.");
+    // === AUTHENTICATION ===
+    public User login(String username, String password) {
+        for (User u : users) {                  // Loop cek credential
+            if (u.checkCredentials(username, password)) {
+                return u;                        // Login berhasil
             }
+        }
+        return null;                             // Login gagal
+    }
 
-        } while (!exitProgram);
+    public boolean registerPassenger(String username, String password) {
+        for (User u : users) {                   // Cek duplicate username
+            if (u.getUsername().equalsIgnoreCase(username)) {
+                return false;                    // Username sudah ada
+            }
+        }
+        users.add(new Passenger(username, password)); // Tambah user baru
+        return true;
+    }
 
-        sc.close();
+    // === STATION MANAGEMENT (Admin) ===
+    public void addStation(String id, String name, double distance) {
+        stations.add(new Station(id, name, distance)); 
+        sortStations();                           // Urutkan stasiun
+        System.out.println("Stasiun berhasil ditambahkan!");
+    }
+
+    public void deleteStation(int index) {
+        if (index >= 0 && index < stations.size()) {
+            Station s = stations.remove(index);   // Hapus stasiun
+            System.out.println("Stasiun " + s.getName() + " dihapus.");
+        } else {
+            System.out.println("Index tidak valid.");
+        }
+    }
+
+    public void editStationName(int index, String newName) {
+        if (index >= 0 && index < stations.size()) {
+            stations.get(index).setName(newName); // Edit nama stasiun
+            System.out.println("Nama stasiun berhasil diubah.");
+        }
+    }
+
+    public List<Station> getStations() { return stations; }
+
+    private void sortStations() {                // Urutkan stasiun berdasarkan jarak
+        stations.sort(Comparator.comparingDouble(Station::getDistanceFromStart));
+    }
+
+    // === TARIFF MANAGEMENT (Admin) ===
+    public TariffManager getTariffManager() { return tariffManager; }
+
+    // === USER MANAGEMENT (Admin) ===
+    public List<User> getUsers() { return users; }
+
+    public void deleteUser(int index) {
+        if (index >= 0 && index < users.size()) {
+            User u = users.get(index);
+            if (u instanceof Admin) {           // Cek admin
+                System.out.println("Tidak dapat menghapus Admin utama.");
+                return;
+            }
+            users.remove(index);                 // Hapus user
+            System.out.println("User " + u.getUsername() + " dihapus.");
+        }
+    }
+
+    // === REPORTING (Admin) ===
+    public void printAllTransactions() {
+        System.out.println("\n=== LAPORAN TRANSAKSI SYSTEM ===");
+    }
+
+    private double totalRevenueSystem = 0;       // Total pemasukan sistem
+
+    public void recordTransaction(double amount) {
+        this.totalRevenueSystem += amount;       // Tambah revenue
+    }
+
+    public double getTotalRevenue() { return totalRevenueSystem; }
+
+    // === PASSENGER ACTIONS ===
+    public double calculateFare(Station start, Station end) {
+        return tariffManager.calculateFare(start, end); // Hitung tarif perjalanan
     }
 }

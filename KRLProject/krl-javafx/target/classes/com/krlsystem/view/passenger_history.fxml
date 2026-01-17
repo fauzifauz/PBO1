@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="20.0" style="-fx-padding: 30;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.krlsystem.controller.PassengerHistoryController">
+   <children>
+      <TableView fx:id="historyTable" VBox.vgrow="ALWAYS">
+        <columns>
+          <TableColumn fx:id="colRoute" prefWidth="300.0" text="Rute Perjalanan" />
+          <TableColumn fx:id="colFare" prefWidth="150.0" text="Tarif" />
+           <TableColumn fx:id="colTime" prefWidth="200.0" text="Waktu Transaksi" />
+           <TableColumn fx:id="colAction" prefWidth="120.0" text="Aksi" />
+         </columns>
+      </TableView>
+   </children>
+</VBox>
