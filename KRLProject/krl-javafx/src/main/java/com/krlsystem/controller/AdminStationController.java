@@ -106,8 +106,14 @@ public class AdminStationController {
                         btnDelete.getStyleClass().add("btn-secondary");
                         btnDelete.setOnAction(event -> {
                             Station s = getTableView().getItems().get(getIndex());
-                            if (stationDAO.deleteStation(s.getId()))
+                            if (stationDAO.deleteStation(s.getId())) {
                                 refreshTable();
+                                statusLabel.setText("Stasiun berhasil dihapus.");
+                                statusLabel.setStyle("-fx-text-fill: green;");
+                            } else {
+                                statusLabel.setText("Gagal hapus! Stasiun mungkin sedang digunakan.");
+                                statusLabel.setStyle("-fx-text-fill: red;");
+                            }
                         });
                     }
 

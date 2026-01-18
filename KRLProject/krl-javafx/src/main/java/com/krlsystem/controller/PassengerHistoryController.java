@@ -82,6 +82,10 @@ public class PassengerHistoryController {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Detail Tiket KRL");
                 alert.setHeaderText("Informasi Tiket Terpesan");
+                String timeStr = (t.getTimestamp() != null)
+                                ? t.getTimestamp().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+                                : "No Timestamp";
+
                 alert.setContentText(String.format(
                                 "ID TRANSAKSI: #%d\n" +
                                                 "WAKTU: %s\n" +
@@ -93,7 +97,7 @@ public class PassengerHistoryController {
                                                 "---------------------------\n" +
                                                 "Tiket ini sudah dalam riwayat perjalanan Anda.",
                                 t.getId(),
-                                t.getTimestamp().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),
+                                timeStr,
                                 t.getOrigin().getName(), t.getOrigin().getId(),
                                 t.getDestination().getName(), t.getDestination().getId(),
                                 t.getAmount()));

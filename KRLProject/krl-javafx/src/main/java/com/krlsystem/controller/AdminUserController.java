@@ -132,8 +132,14 @@ public class AdminUserController {
                         btnDelete.getStyleClass().add("btn-secondary");
                         btnDelete.setOnAction(event -> {
                             User u = getTableView().getItems().get(getIndex());
-                            if (userDAO.deleteUser(u.getId()))
+                            if (userDAO.deleteUser(u.getId())) {
                                 refreshTable();
+                                statusLabel.setText("User berhasil dihapus.");
+                                statusLabel.setStyle("-fx-text-fill: green;");
+                            } else {
+                                statusLabel.setText("Gagal hapus user!");
+                                statusLabel.setStyle("-fx-text-fill: red;");
+                            }
                         });
                     }
 

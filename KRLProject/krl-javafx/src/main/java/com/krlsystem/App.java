@@ -27,12 +27,16 @@ public class App extends Application {
         try {
             scene.setRoot(loadFXML(fxml));
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Gagal memuat halaman: " + fxml);
         }
     }
 
     private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/" + fxml + ".fxml"));
+        java.net.URL fxmlLocation = App.class.getResource("view/" + fxml + ".fxml");
+        if (fxmlLocation == null) {
+            throw new IOException("File FXML tidak ditemukan: view/" + fxml + ".fxml");
+        }
+        FXMLLoader fxmlLoader = new FXMLLoader(fxmlLocation);
         return fxmlLoader.load();
     }
 

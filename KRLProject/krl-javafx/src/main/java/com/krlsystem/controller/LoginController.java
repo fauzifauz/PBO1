@@ -16,7 +16,7 @@ public class LoginController {
     @FXML
     private Label statusLabel;
 
-    private UserDAO userDAO = new UserDAO();
+    private final UserDAO userDAO = new UserDAO();
 
     @FXML
     private void handleLogin() {
